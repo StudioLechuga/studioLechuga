@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+
 const Header = () => {
   return (
     <>
@@ -22,6 +23,7 @@ const Header = () => {
         <div className="w-7/12">
           <nav className="flex justify-end items-cente">
             <ul className="flex justify-end items-center gap-2">
+            <li className="font-sans">Blog</li>
               <li className="font-sans">About</li>
               <li className="px-3 py-1 bg-lechuga-600 rounded-2xl text-slate-50 font-bold font-sans">
                 Login
