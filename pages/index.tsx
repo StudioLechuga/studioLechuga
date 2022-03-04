@@ -31,20 +31,18 @@ const Home = (props: IProps) => {
       <div className="hero">
         <div className="grid grid-cols-1 md:grid-cols-4">
           {props.lastestPosts.map((post) => (
-            <div className="relative h-96 w-full    " key={post._id}>
+            <div
+              className="relative h-96 w-full   first-of-type:  "
+              key={post._id}
+            >
               <div className="absolute w-full h-full object-cover z-0  hover:backdrop-opacity-10 hover:backdrop-invert hover:bg-slate-600/60 bg-slate-900/40 "></div>
               <img
                 src={post.img}
                 alt=""
                 className="w-full h-full  object-cover  "
               />
-              <div
-                className="absolute bottom-0 left-0 w-2/3 pb-8 pl-8  flex
-              flex-col"
-              >
-                <div className="">
-                  <CategoryCard category={post.category} color="" />
-                </div>
+              <div className="absolute bottom-0 left-0 w-2/3 pb-8 pl-8 grid  ">
+                <CategoryCard category={post.category} color="" />
 
                 <h3 className="text-emerald-50 font-bold">{post.title}</h3>
                 <span className="text-emerald-50 ">

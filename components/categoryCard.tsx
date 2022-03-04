@@ -6,10 +6,10 @@ interface IProps {
 }
 const CategoryCard = (props: IProps) => {
   return (
-    <span className=" w-auto rounded-full px-2 bg-white flex items-center justify-between">
+    <div className="w-auto rounded-full px-2 bg-white flex items-center ">
       <span className="w-[12px] h-[12px] bg-blue-700 rounded-full"></span>
-      <span className="">{props.category}</span>
-    </span>
+      <span className=" ml-2">{props.category}</span>
+    </div>
   );
 };
 export default CategoryCard;
