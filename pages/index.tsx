@@ -20,9 +20,23 @@ const GET_LASTE_FOUR_POSTS = groq`
     
   }
 `;
+const GET_LASTE_POSTS = groq`
+  *[_type == "post" ][0..6] {
+    _id,
+    title,
+    mainImage,
+    slug,
+    publishedAt,
+    "categories":categories[]->{
+      title
+    },
+    
+  }
+`;
 
 interface IProps {
   lastestPosts: any;
+  allPosts: any;
   preview?: boolean;
 }
 const Home = (props: IProps) => {
@@ -53,13 +67,28 @@ const Home = (props: IProps) => {
           ))}
         </div>
       </div>
-      <div className="lates-post"></div>
+      <div className="lates-post md:w-5/6 m-auto">
+        <h2 className="font-bold text-3xl mt-6">Recientes</h2>
+        <div className="flex   flex-wrap">
+          {props.lastestPosts.map((post) => (
+            <div key={post._id} className="md:w-1/4 w-full p-4 ">
+              <img src={post.img} alt="" className="w-full rounded-xl" />
+
+              <div>
+                <CategoryCard category={post.category} color="" />
+                <h3>{post.title}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };
 
 export const getServerSideProps = async ({ preview = false }) => {
   const post = await getClient(preview).fetch(GET_LASTE_FOUR_POSTS);
+  const lastestPosts = await getClient(preview).fetch(GET_LASTE_POSTS);
   console.log(post);
   return {
     props: {
@@ -68,7 +97,11 @@ export const getServerSideProps = async ({ preview = false }) => {
         img: urlFor(post.mainImage).url(),
         category: post.categories[0].title,
       })),
-
+      allPosts: lastestPosts.map((post: any) => ({
+        ...post,
+        img: urlFor(post.mainImage).url(),
+        category: post.categories[0].title,
+      })),
       preview,
     },
   };
