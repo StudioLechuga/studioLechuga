@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface IProps {
   category: string;
@@ -6,7 +6,7 @@ interface IProps {
 }
 const CategoryCard = (props: IProps) => {
   return (
-    <div className="w-auto rounded-full px-2 bg-white flex items-center ">
+    <div className="w-auto rounded-full px-2 flex items-center ">
       <span className="w-[12px] h-[12px] bg-blue-700 rounded-full"></span>
       <span className=" ml-2">{props.category}</span>
     </div>

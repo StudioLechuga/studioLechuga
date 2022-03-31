@@ -1,14 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextPage } from "next";
-import { groq } from "next-sanity";
-import Head from "next/head";
-import Image from "next/image";
-import CategoryCard from "../components/categoryCard";
-import { urlFor } from "../lib/sanity";
-import { getClient } from "../lib/sanity.server";
-import Thumbnail from "../components/Thumbnail";
-import ThumbnailLasted from "../components/ThumbnaiLasted";
-import Link from "next/link";
+import { groq } from 'next-sanity';
+import { urlFor } from '../lib/sanity';
+import { getClient } from '../lib/sanity.server';
+import Thumbnail from '../components/Thumbnail';
+import ThumbnailLasted from '../components/ThumbnaiLasted';
+
 const GET_LASTE_FOUR_POSTS = groq`
   *[_type == "post" ][0..4] {
     _id,
@@ -45,15 +41,15 @@ const Home = (props: IProps) => {
   return (
     <>
       <div className="hero">
-        <div className="grid grid-cols-1 md:grid-cols-4">
+        <div className="flex justify-center align-center gap-2 flex-wrap ">
           {props.lastestPosts.map((post: any) => (
             <ThumbnailLasted key={post._id} post={post} />
           ))}
         </div>
       </div>
-      <div className="lates-post md:w-5/6 m-auto">
+      <div className="lates-post flex flex-col justify-center items-center ">
         <h2 className="font-bold text-3xl mt-6">Recientes</h2>
-        <div className="flex   flex-wrap">
+        <div className="flex flex-wrap item-center justify-center w-full">
           {props.lastestPosts.map((post: any) => (
             <Thumbnail post={post} key={post._id} />
           ))}
