@@ -17,7 +17,7 @@ const GET_POST = groq`
     "slug": slug.current
   }
 `
-const Index = (props) => {
+const Index = (props:any) => {
   console.log(props)
 
   return (

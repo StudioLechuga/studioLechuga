@@ -7,9 +7,15 @@ import {
 import { config } from "./config";
 
 export const urlFor = (source: any): any =>
-  createImageUrlBuilder(config).image(source);
+  createImageUrlBuilder({
+    projectId: config.projectId || "",
+    dataset: config.dataset,
+  }).image(source);
 
-export const usePreviewSubscription = createPreviewSubscriptionHook(config);
+export const usePreviewSubscription = createPreviewSubscriptionHook({
+  projectId: config.projectId || "",
+  dataset: config.dataset,
+});
 
 export const PortableText = createPortableTextComponent({
   projectId: config.projectId || "",
@@ -19,4 +25,7 @@ export const PortableText = createPortableTextComponent({
 
 
 
-export const useCurrentUser = createCurrentUserHook(config);
+export const useCurrentUser = createCurrentUserHook({
+  projectId: config.projectId || "",
+  dataset: config.dataset,
+});
