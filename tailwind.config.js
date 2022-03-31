@@ -25,5 +25,5 @@ module.exports = {
       sans: ["Nunito", "sans-serif"],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography'),],
 };

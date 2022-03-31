@@ -6,7 +6,9 @@ import Image from "next/image";
 import CategoryCard from "../components/categoryCard";
 import { urlFor } from "../lib/sanity";
 import { getClient } from "../lib/sanity.server";
-import styles from "../styles/Home.module.css";
+import Thumbnail from "../components/Thumbnail";
+import ThumbnailLasted from "../components/ThumbnaiLasted";
+import Link from "next/link";
 const GET_LASTE_FOUR_POSTS = groq`
   *[_type == "post" ][0..4] {
     _id,
@@ -44,41 +46,16 @@ const Home = (props: IProps) => {
     <>
       <div className="hero">
         <div className="grid grid-cols-1 md:grid-cols-4">
-          {props.lastestPosts.map((post) => (
-            <div
-              className="relative h-96 w-full   first-of-type:  "
-              key={post._id}
-            >
-              <div className="absolute w-full h-full object-cover z-0  hover:backdrop-opacity-10 hover:backdrop-invert hover:bg-slate-600/60 bg-slate-900/40 "></div>
-              <img
-                src={post.img}
-                alt=""
-                className="w-full h-full  object-cover  "
-              />
-              <div className="absolute bottom-0 left-0 w-2/3 pb-8 pl-8 grid  ">
-                <CategoryCard category={post.category} color="" />
-
-                <h3 className="text-emerald-50 font-bold">{post.title}</h3>
-                <span className="text-emerald-50 ">
-                  December 10, 20195 Mins read
-                </span>
-              </div>
-            </div>
+          {props.lastestPosts.map((post: any) => (
+            <ThumbnailLasted key={post._id} post={post} />
           ))}
         </div>
       </div>
       <div className="lates-post md:w-5/6 m-auto">
         <h2 className="font-bold text-3xl mt-6">Recientes</h2>
         <div className="flex   flex-wrap">
-          {props.lastestPosts.map((post) => (
-            <div key={post._id} className="md:w-1/4 w-full p-4 ">
-              <img src={post.img} alt="" className="w-full rounded-xl" />
-
-              <div>
-                <CategoryCard category={post.category} color="" />
-                <h3>{post.title}</h3>
-              </div>
-            </div>
+          {props.lastestPosts.map((post: any) => (
+            <Thumbnail post={post} key={post._id} />
           ))}
         </div>
       </div>
@@ -89,11 +66,11 @@ const Home = (props: IProps) => {
 export const getServerSideProps = async ({ preview = false }) => {
   const post = await getClient(preview).fetch(GET_LASTE_FOUR_POSTS);
   const lastestPosts = await getClient(preview).fetch(GET_LASTE_POSTS);
-  console.log(post);
   return {
     props: {
       lastestPosts: post.map((post: any) => ({
         ...post,
+
         img: urlFor(post.mainImage).url(),
         category: post.categories[0].title,
       })),
