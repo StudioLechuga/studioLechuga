@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <>
-      <header className="md:w-5/6 w-full m-auto pl-4 pr-4 pt-2 pb-2  flex items-center">
+      <header className=" m-auto pl-4 pr-4 pt-2 pb-2  flex items-center">
         <Link href="/" passHref={true}><div className="flex   items-center w-5/12 gap-2">
           <div className="md:hidden lg:hidden">
             <Image

@@ -6,7 +6,7 @@ import CategoryCard from './categoryCard';
 const Thumbnail = (props: IProps) => {
   const { post } = props;
   return (
-    <article className="m-2 bg-[#0a0908] text-white p-2 rounded-xl">
+    <article className="m-2 bg-[#ffffff]  p-2 rounded-xl shadow-md w-[364px]">
       <Link href={`/blog/post/${post?.slug?.current}`} passHref>
         <div className=" w-full ">
           <img
@@ -14,9 +14,9 @@ const Thumbnail = (props: IProps) => {
             alt={post.title}
             className="w-full  h-[222px]   rounded-xl object-cover"
           />
-          <div className="">
+          <div className="from-neutral-900">
             <CategoryCard category={post.category} color="" />
-            <h3 className="">{post.title}</h3>
+            <h3 className="from-neutral-900">{post.title}</h3>
           </div>
         </div>
       </Link>
